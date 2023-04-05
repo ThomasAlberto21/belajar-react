@@ -10,7 +10,7 @@ const video = (props) => {
           src='https://images.panda.org/assets/images/pages/welcome/orangutan_1600x1000_279157.jpg'
           alt='img'
         />
-        // ! mengambil props rating di home
+        // ! mengambil props rating , title dan desc di home
         <p className='rating'>{props.rating}</p>
       </div>
       <p className='title'>{props.title}</p>
