@@ -53,15 +53,18 @@ class LifeCycleComp extends React.Component {
 
   componentDidMount() {
     console.log('componentDidMount');
-    setTimeout(() => {
-      this.setState({
-        count: 2,
-      });
-    }, 3000);
+    this.setState({
+      showComponents: false,
+    });
   }
 
   shouldComponentUpdate(nextProps, nextState) {
     console.log('shouldComponentUpdate');
+    console.log('next State:', nextState);
+    console.log('this state:', this.state);
+    if (nextState.count >= 3) {
+      this.deleteComponents();
+    }
     return true;
   }
 
@@ -78,8 +81,24 @@ class LifeCycleComp extends React.Component {
     console.log('componentWillUnmount');
   }
 
+  changeCount = () => {
+    this.setState({
+      count: this.state.count + 1,
+    });
+  };
+
+  deleteComponents = () => {
+    this.setState({
+      count: this.componentDidMount,
+    });
+  };
+
   render() {
-    return <button className='btn'>Component Button {this.state.count}</button>;
+    return (
+      <button className='btn' onClick={this.changeCount}>
+        Component Button {this.state.count}
+      </button>
+    );
   }
 }
 
