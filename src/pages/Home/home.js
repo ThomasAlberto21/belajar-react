@@ -1,8 +1,9 @@
 import React from 'react';
+import BlogPost from '../BlogPost/BlogPost';
 // import FunctionalComponent from './components/FunctionalComponent/FunctionalComponent';
 // import StatefullComponent from './components/StatefullComponent/StatefullComponent';
 // import Product from '../Product/product';
-import LifeCycleComp from '../LifeCycleComp/LifeCycleComp';
+// import LifeCycleComp from '../LifeCycleComp/LifeCycleComp';
 
 class Home extends React.Component {
   state = {
@@ -19,7 +20,8 @@ class Home extends React.Component {
         <Video /> */}
 
         {/* <Product /> */}
-        {this.state.showComponents ? <LifeCycleComp /> : null}
+        {/* {this.state.showComponents ? <LifeCycleComp /> : null} */}
+        <BlogPost />
       </>
     );
   }
