@@ -18,8 +18,8 @@ class BlogPost extends React.Component {
     //     });
     //   });
 
-    // ! Memanggil data API menggunakan axios
-    axios.get('https://jsonplaceholder.typicode.com/posts').then((result) => {
+    // ! Memanggil data API menggunakan axios dan menggunakan json-server(membuat fake API di dalam localhost kita)
+    axios.get('http://localhost:3004/posts').then((result) => {
       this.setState({
         post: result.data,
       });
