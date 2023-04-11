@@ -8,6 +8,22 @@ class BlogPost extends React.Component {
     post: [],
   };
 
+  getPostApi = () => {
+    // ! Memanggil data API menggunakan axios dan menggunakan json-server(membuat fake API di dalam localhost kita)
+    axios.get('http://localhost:3004/posts').then((result) => {
+      this.setState({
+        post: result.data,
+      });
+    });
+  };
+
+  // membuat handle untuk menghapus data
+  handleRemove = (data) => {
+    axios.delete(`http://localhost:3004/posts/${data}`).then((res) => {
+      this.getPostApi();
+    });
+  };
+
   componentDidMount() {
     // ! Memanggil data API menggunakan fetch (ES6)
     // fetch('https://jsonplaceholder.typicode.com/posts')
@@ -18,12 +34,7 @@ class BlogPost extends React.Component {
     //     });
     //   });
 
-    // ! Memanggil data API menggunakan axios dan menggunakan json-server(membuat fake API di dalam localhost kita)
-    axios.get('http://localhost:3004/posts').then((result) => {
-      this.setState({
-        post: result.data,
-      });
-    });
+    this.getPostApi();
   }
 
   render() {
@@ -31,7 +42,7 @@ class BlogPost extends React.Component {
       <>
         <p className='section-title'>Blog Post</p>
         {this.state.post.map((post) => {
-          return <Post key={post.id} title={post.title} desc={post.body} />;
+          return <Post key={post.id} data={post} remove={this.handleRemove} />;
         })}
       </>
     );

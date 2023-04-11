@@ -45,3 +45,18 @@
   font-size: 16px;
   color: #4a4a4a;
 }
+
+.remove {
+  padding: 12px 18px;
+  background-color: rgb(255, 41, 41);
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  outline: none;
+  margin-top: 10px;
+  border: none;
+}
+
+.remove:hover {
+  opacity: 0.7;
+}
