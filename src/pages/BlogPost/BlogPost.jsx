@@ -6,10 +6,16 @@ import Post from '../../components/Post/Post';
 class BlogPost extends React.Component {
   state = {
     post: [],
+    formBlogPost: {
+      id: 1,
+      title: '',
+      body: '',
+      userId: 1,
+    },
   };
 
   getPostApi = () => {
-    // ! Memanggil data API menggunakan axios dan menggunakan json-server(membuat fake API di dalam localhost kita)
+    // Memanggil data API menggunakan axios dan menggunakan json-server(membuat fake API di dalam localhost kita)
     axios.get('http://localhost:3004/posts').then((result) => {
       this.setState({
         post: result.data,
@@ -24,16 +30,19 @@ class BlogPost extends React.Component {
     });
   };
 
-  componentDidMount() {
-    // ! Memanggil data API menggunakan fetch (ES6)
-    // fetch('https://jsonplaceholder.typicode.com/posts')
-    //   .then((response) => response.json())
-    //   .then((json) => {
-    //     this.setState({
-    //       post: json,
-    //     });
-    //   });
+  // Membuat handle untuk menambahkan data baru
+  handleFormChange = (event) => {
+    let formBlogPostNew = { ...this.state.formBlogPost };
+    formBlogPostNew[event.target.name] = event.target.value;
+    this.setState(
+      {
+        formBlogPost: formBlogPostNew,
+      },
+      () => console.log(this.state.formBlogPost)
+    );
+  };
 
+  componentDidMount() {
     this.getPostApi();
   }
 
@@ -41,6 +50,27 @@ class BlogPost extends React.Component {
     return (
       <>
         <p className='section-title'>Blog Post</p>
+        <div className='form-add-post'>
+          <label htmlFor='title'>Title</label>
+          <input
+            type='text'
+            name='title'
+            placeholder='Add Your Title'
+            onChange={this.handleFormChange}
+          />
+          <label htmlFor='body'>Body Content</label>
+          <textarea
+            name='body'
+            id=''
+            cols='30'
+            rows='10'
+            placeholder='Add Your Body Content'
+            onChange={this.handleFormChange}
+          ></textarea>
+          <button type='submit' className='btn-submit'>
+            Simpan Blog{' '}
+          </button>
+        </div>
         {this.state.post.map((post) => {
           return <Post key={post.id} data={post} remove={this.handleRemove} />;
         })}
