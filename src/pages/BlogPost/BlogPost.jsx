@@ -14,13 +14,27 @@ class BlogPost extends React.Component {
     },
   };
 
+  // Memanggil data API menggunakan axios dan menggunakan json-server(membuat fake API di dalam localhost kita)
   getPostApi = () => {
-    // Memanggil data API menggunakan axios dan menggunakan json-server(membuat fake API di dalam localhost kita)
-    axios.get('http://localhost:3004/posts').then((result) => {
-      this.setState({
-        post: result.data,
+    axios
+      .get('http://localhost:3004/posts?_sort=id&_order=desc')
+      .then((result) => {
+        this.setState({
+          post: result.data,
+        });
       });
-    });
+  };
+
+  // Menambahkan data dan dikirimkan ke API
+  postDataToApi = () => {
+    axios.post('http://localhost:3004/posts', this.state.formBlogPost).then(
+      (res) => {
+        this.getPostApi();
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   };
 
   // membuat handle untuk menghapus data
@@ -33,13 +47,17 @@ class BlogPost extends React.Component {
   // Membuat handle untuk menambahkan data baru
   handleFormChange = (event) => {
     let formBlogPostNew = { ...this.state.formBlogPost };
+    let timeStamp = new Date().getTime(); // membuat id unik
+    formBlogPostNew['id'] = timeStamp;
     formBlogPostNew[event.target.name] = event.target.value;
-    this.setState(
-      {
-        formBlogPost: formBlogPostNew,
-      },
-      () => console.log(this.state.formBlogPost)
-    );
+    this.setState({
+      formBlogPost: formBlogPostNew,
+    });
+  };
+
+  // membuat handle untuk submit form nya
+  handleSubmit = () => {
+    this.postDataToApi();
   };
 
   componentDidMount() {
@@ -67,7 +85,11 @@ class BlogPost extends React.Component {
             placeholder='Add Your Body Content'
             onChange={this.handleFormChange}
           ></textarea>
-          <button type='submit' className='btn-submit'>
+          <button
+            type='submit'
+            className='btn-submit'
+            onClick={this.handleSubmit}
+          >
             Simpan Blog{' '}
           </button>
         </div>
