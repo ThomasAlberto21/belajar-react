@@ -106,7 +106,10 @@ class BlogPost extends React.Component {
     }
   };
 
-  handleDetailPost = () => {};
+  handleDetailPost = (id) => {
+    // const navigate = useNavigate();
+    this.props.history.push(`/detail-post/${id}`);
+  };
 
   componentDidMount() {
     this.getPostApi();
