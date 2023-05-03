@@ -5,6 +5,8 @@ import BlogPost from '../BlogPost/BlogPost';
 import Video from '../../components/props/video';
 import Product from '../Product/product';
 import LifeCycleComp from '../LifeCycleComp/LifeCycleComp';
+import { BrowserRouter, Route, Link, Routes } from 'react-router-dom';
+import './home.css'
 
 class Home extends React.Component {
   state = {
@@ -13,8 +15,8 @@ class Home extends React.Component {
 
   render() {
     return (
-      <>
-        <h3>Video</h3>
+      <BrowserRouter>
+        {/* <h3>Video</h3>
         <Video
           rating='8.50'
           title='Orang Utan 1'
@@ -39,8 +41,23 @@ class Home extends React.Component {
         {this.state.showComponents ? <LifeCycleComp /> : null}
         <hr />
 
-        <BlogPost />
-      </>
+        <BlogPost /> */}
+
+        <>
+          <div className='navigation'>
+            <Link to='/'>Blog Post</Link>
+            <Link to='/product'>product</Link>
+            <Link to='/video'>video</Link>
+            <Link to='/lifecycle'>lifecycle</Link>
+          </div>
+          <Routes>
+            <Route path='/' exact element={<BlogPost />} />
+            <Route path='/product' element={<Product />} />
+            <Route path='/video' element={<Video />} />
+            <Route path='/lifecycle' element={<LifeCycleComp />} />
+          </Routes>
+        </>
+      </BrowserRouter>
     );
   }
 }
