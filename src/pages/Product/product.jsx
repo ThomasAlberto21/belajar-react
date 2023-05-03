@@ -18,6 +18,7 @@ class Product extends React.Component {
   render() {
     return (
       <>
+      <h3>Products</h3>
         <div className='header'>
           <div className='logo'>
             <img

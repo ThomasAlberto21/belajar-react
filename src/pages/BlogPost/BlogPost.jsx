@@ -113,7 +113,7 @@ class BlogPost extends React.Component {
   render() {
     return (
       <>
-        <p className='section-title'>Blog Post</p>
+        <h3 className='section-title'>Blog Post</h3>
         <div className='form-add-post'>
           <label htmlFor='title'>Title</label>
           <input
