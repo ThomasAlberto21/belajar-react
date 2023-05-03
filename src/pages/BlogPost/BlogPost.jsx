@@ -106,6 +106,8 @@ class BlogPost extends React.Component {
     }
   };
 
+  handleDetailPost = () => {};
+
   componentDidMount() {
     this.getPostApi();
   }
@@ -148,6 +150,7 @@ class BlogPost extends React.Component {
               data={post}
               remove={this.handleRemove}
               update={this.handleUpdate}
+              detailPost={this.handleDetailPost}
             />
           );
         })}
